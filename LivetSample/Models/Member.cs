@@ -11,6 +11,29 @@ namespace LivetSample.Models
     {
         //Main m_parent;
 
+        // プロパティ名を直接書くのをやめた
+        // 参考：http://posaune.hatenablog.com/entry/20111213/1323789203
+
+        // 本来は↓こう書くところを
+        //if (PropertyChanged != null)
+        //{
+        //  PropertyChanged(new PropertyChangedEventArgs("Age"));
+        //}
+        // Livetを使えば↓こう書ける
+        // RaisePropertyChanged();
+
+        bool _isChecked;
+        public bool IsChecked
+        {
+            get { return _isChecked; }
+            set
+            {
+                if (_isChecked == value) return;
+                _isChecked = value;
+                RaisePropertyChanged();
+            }
+        }
+
         String _name;
         public String Name
         {
@@ -19,7 +42,7 @@ namespace LivetSample.Models
             {
                 if (_name == value) return;
                 _name = value;
-                RaisePropertyChanged("Name");
+                RaisePropertyChanged();
             }
         }
 
@@ -31,7 +54,7 @@ namespace LivetSample.Models
             {
                 if (_birthday == value) return;
                 _birthday = value;
-                RaisePropertyChanged("BirthDay");
+                RaisePropertyChanged();
             }
         }
 
@@ -43,7 +66,7 @@ namespace LivetSample.Models
             {
                 if (_memo == value) return;
                 _memo = value;
-                RaisePropertyChanged("Memo");
+                RaisePropertyChanged();
             }
         }
 

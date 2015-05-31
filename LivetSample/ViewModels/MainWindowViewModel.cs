@@ -12,6 +12,7 @@ using Livet.EventListeners;
 using Livet.Messaging.Windows;
 
 using LivetSample.Models;
+using System.Collections.ObjectModel;
 
 namespace LivetSample.ViewModels
 {
@@ -58,6 +59,34 @@ namespace LivetSample.ViewModels
          * LivetのViewModelではプロパティ変更通知(RaisePropertyChanged)やDispatcherCollectionを使ったコレクション変更通知は
          * 自動的にUIDispatcher上での通知に変換されます。変更通知に際してUIDispatcherを操作する必要はありません。
          */
+
+        private Model _model;
+        public Model Model
+        {
+            get
+            {
+                if( _model ==null )
+                {
+                    _model = new Model();
+                }
+                return _model;
+            }
+        }
+
+        private Livet.ReadOnlyDispatcherCollection<MemberViewModel> _listMember;
+        public Livet.ReadOnlyDispatcherCollection<MemberViewModel> ListMember
+        {
+            get
+            {
+                if (_listMember == null)
+                {
+                    _listMember = Livet.ViewModelHelper.CreateReadOnlyDispatcherCollection(Model.ListMember
+                        , m => new MemberViewModel(m), Livet.DispatcherHelper.UIDispatcher);
+                    CompositeDisposable.Add(_listMember);
+                }
+                return _listMember;
+            }
+        }
 
         public void Initialize()
         {

@@ -4,13 +4,28 @@ using System.Linq;
 using System.Text;
 
 using Livet;
+using System.Collections.ObjectModel;
 
 namespace LivetSample.Models
 {
     public class Model : NotificationObject
     {
-        /*
-         * NotificationObjectはプロパティ変更通知の仕組みを実装したオブジェクトです。
-         */
+        ObservableCollection<Member> _listMember;
+
+        public ObservableCollection<Member> ListMember
+        {
+            get
+            {
+                if( _listMember == null)
+                {
+                    _listMember = new ObservableCollection<Member>
+                    {
+                        new Member(){ Name = "hoge", Birthday = new DateTime(1988,6,5), Memo = "memo1" },
+                        new Member(){ Name = "huga", Birthday = new DateTime(1999,11,26), Memo = "memo2" },
+                    };
+                }
+                return _listMember;
+            }
+        }
     }
 }
