@@ -4,12 +4,13 @@ using System.Linq;
 using System.Text;
 
 using Livet;
+using System.Collections.ObjectModel;
 
 namespace LivetSample.Models
 {
     public class Member : NotificationObject
     {
-        //Main m_parent;
+        private Collection<Member> _parent;
 
         // プロパティ名を直接書くのをやめた
         // 参考：http://posaune.hatenablog.com/entry/20111213/1323789203
@@ -70,24 +71,24 @@ namespace LivetSample.Models
             }
         }
 
-        //public Member(Main parent)
-        //{
-        //    m_parent = parent;
-        //}
+        public Member(Collection<Member> parent)
+        {
+            _parent = parent;
+        }
 
-        //public bool IsIncludedInMainCollection()
-        //{
-        //    return m_parent.Members.Contains(this);
-        //}
+        public bool IsIncludedInMainCollection()
+        {
+            return _parent.Contains(this);
+        }
 
-        //public void AddThisToMainCollection()
-        //{
-        //    m_parent.Members.Add(this);
-        //}
+        public void AddThisToMainCollection()
+        {
+            _parent.Add(this);
+        }
 
-        //public void RemoveThisFromMainCollection()
-        //{
-        //    m_parent.Members.Remove(this);
-        //}
+        public void RemoveThisFromMainCollection()
+        {
+            _parent.Remove(this);
+        }
     }
 }

@@ -27,6 +27,10 @@
         <i:EventTrigger EventName="Closed">
             <l:DataContextDisposeAction/>
         </i:EventTrigger>
+        
+        <l:InteractionMessageTrigger MessageKey="Transition" Messenger="{Binding Messenger}">
+            <l:TransitionInteractionMessageAction WindowType="{x:Type v:DetailWindow}" Mode="Modal"></l:TransitionInteractionMessageAction>
+        </l:InteractionMessageTrigger>
 
         <!--WindowのCloseキャンセル処理に対応する場合は、WindowCloseCancelBehaviorの使用を検討してください-->
 
@@ -38,7 +42,7 @@
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
         <TextBlock HorizontalAlignment="Left" Margin="10,14,0,0" TextWrapping="Wrap" Text="メンバー管理" VerticalAlignment="Top"/>
-        <Button Content="追加" HorizontalAlignment="Right" Margin="0,8,146,0" VerticalAlignment="Top" Width="64"/>
+        <Button Content="追加" HorizontalAlignment="Right" Margin="0,8,146,0" VerticalAlignment="Top" Width="64" Command="{Binding EditNewCommand}"/>
         <Button Content="編集" HorizontalAlignment="Right" Margin="0,8,77,0" VerticalAlignment="Top" Width="64"/>
         <Button Content="削除" HorizontalAlignment="Right" Margin="0,8,8,0" VerticalAlignment="Top" Width="64"/>
         

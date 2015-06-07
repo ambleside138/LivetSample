@@ -20,8 +20,8 @@ namespace LivetSample.Models
                 {
                     _listMember = new ObservableCollection<Member>
                     {
-                        new Member(){ Name = "hoge", Birthday = new DateTime(1988,6,5), Memo = "memo1" },
-                        new Member(){ Name = "huga", Birthday = new DateTime(1999,11,26), Memo = "memo2" },
+                        new Member(_listMember){ Name = "hoge", Birthday = new DateTime(1988,6,5), Memo = "memo1" },
+                        new Member(_listMember){ Name = "huga", Birthday = new DateTime(1999,11,26), Memo = "memo2" },
                     };
                 }
                 return _listMember;

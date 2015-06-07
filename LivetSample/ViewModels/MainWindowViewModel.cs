@@ -91,5 +91,28 @@ namespace LivetSample.ViewModels
         public void Initialize()
         {
         }
+
+
+        #region EditNewCommand
+        private ViewModelCommand _EditNewCommand;
+
+        public ViewModelCommand EditNewCommand
+        {
+            get
+            {
+                if (_EditNewCommand == null)
+                {
+                    _EditNewCommand = new ViewModelCommand(EditNew);
+                }
+                return _EditNewCommand;
+            }
+        }
+
+        public void EditNew()
+        {
+            Messenger.Raise(new TransitionMessage(new DetailWindowViewModel(new Member(Model.ListMember)), "Transition"));
+        }
+        #endregion
+
     }
 }
