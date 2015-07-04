@@ -1,0 +1,83 @@
+﻿<Window x:Class="SupportTool.Views.SupportEditWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+        xmlns:l="http://schemas.livet-mvvm.net/2011/wpf"
+        xmlns:v="clr-namespace:SupportTool.Views"
+        xmlns:vm="clr-namespace:SupportTool.ViewModels"
+        Title="SupportEditWindow" Height="350" Width="525">
+    
+     <i:Interaction.Triggers>
+     
+     	<!--Viewに特別な要件が存在しない限りは、トリガーやアクションの自作にこだわらず積極的にコードビハインドを使いましょう -->
+    	<!--Viewのコードビハインドは、基本的にView内で完結するロジックとViewModelからのイベントの受信(専用リスナを使用する)に限るとトラブルが少なくなります -->
+    	<!--Livet1.1からはコードビハインドでViewModelのイベントを受信するためのWeakEventLisnterサポートが追加されています --> 
+        
+        <!--WindowのContentRenderedイベントのタイミングでViewModelのInitializeメソッドが呼ばれます-->
+        <i:EventTrigger EventName="ContentRendered">
+            <l:LivetCallMethodAction MethodTarget="{Binding}" MethodName="Initialize"/>
+        </i:EventTrigger>
+
+        <!--Windowが閉じたタイミングでViewModelのDisposeメソッドが呼ばれます-->
+        <i:EventTrigger EventName="Closed">
+            <l:DataContextDisposeAction/>
+        </i:EventTrigger>
+
+        <!--WindowのCloseキャンセル処理に対応する場合は、WindowCloseCancelBehaviorの使用を検討してください-->
+
+    </i:Interaction.Triggers>
+    
+    <Window.Resources>
+        <Style TargetType="{x:Type TextBlock}">
+            <Setter Property="Margin" Value="4" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+        <Style TargetType="{x:Type TextBox}">
+            <Setter Property="Margin" Value="4" />
+        </Style>
+    </Window.Resources>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        
+        <Calendar Grid.Row="0" Grid.Column="0"></Calendar>
+        <Grid Grid.Row="0" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            
+            <TextBlock Grid.Row="0" Grid.Column="0">製品</TextBlock>
+            <TextBox Grid.Row="0" Grid.Column="1"></TextBox>
+            
+            <TextBlock Grid.Row="1" Grid.Column="0">案件</TextBlock>
+            <TextBox Grid.Row="1" Grid.Column="1"></TextBox>
+
+            <TextBlock Grid.Row="2" Grid.Column="0">バージョン</TextBlock>
+            <TextBox Grid.Row="2" Grid.Column="1"></TextBox>
+
+            <TextBlock Grid.Row="3" Grid.Column="0">連絡者</TextBlock>
+            <TextBox Grid.Row="3" Grid.Column="1"></TextBox>
+
+            <TextBlock Grid.Row="4" Grid.Column="0">タグ</TextBlock>
+            <TextBox Grid.Row="4" Grid.Column="1"></TextBox>
+        </Grid>
+        
+        <TextBox Grid.ColumnSpan="2" Grid.Row="1"></TextBox>
+    </Grid>
+</Window>
