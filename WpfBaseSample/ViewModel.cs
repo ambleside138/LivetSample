@@ -12,6 +12,11 @@ namespace WpfBaseSample
     {
         public int ID { get; set; }
         public string Name { get; set; }
+
+        //public override bool Equals(object obj)
+        //{
+        //    return ((Ringo)obj).Name == Name;
+        //}
     }
 
 
