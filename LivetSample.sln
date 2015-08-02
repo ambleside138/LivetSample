@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SupportTool", "SupportTool\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormTest", "FormTest\FormTest.csproj", "{7C65E911-4EC6-4371-A8E1-734EB7162303}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetroTest", "MetroTest\MetroTest.csproj", "{B5D7DC45-A3CF-4AD0-B846-92196DFCE185}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -73,6 +75,16 @@ Global
 		{7C65E911-4EC6-4371-A8E1-734EB7162303}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{7C65E911-4EC6-4371-A8E1-734EB7162303}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{7C65E911-4EC6-4371-A8E1-734EB7162303}.Release|x86.ActiveCfg = Release|Any CPU
+		{B5D7DC45-A3CF-4AD0-B846-92196DFCE185}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B5D7DC45-A3CF-4AD0-B846-92196DFCE185}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B5D7DC45-A3CF-4AD0-B846-92196DFCE185}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{B5D7DC45-A3CF-4AD0-B846-92196DFCE185}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{B5D7DC45-A3CF-4AD0-B846-92196DFCE185}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B5D7DC45-A3CF-4AD0-B846-92196DFCE185}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B5D7DC45-A3CF-4AD0-B846-92196DFCE185}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B5D7DC45-A3CF-4AD0-B846-92196DFCE185}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{B5D7DC45-A3CF-4AD0-B846-92196DFCE185}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{B5D7DC45-A3CF-4AD0-B846-92196DFCE185}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

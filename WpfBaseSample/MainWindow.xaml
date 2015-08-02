@@ -91,7 +91,7 @@
             </ListBox.ItemTemplate>
         </ListBox>
         
-        <toolkit:AutoCompleteBox Grid.Row="0" Grid.Column="0" Margin="10,0,0,0" Width="150" Height="28"
+        <!--<toolkit:AutoCompleteBox Grid.Row="0" Grid.Column="0" Margin="10,0,0,0" Width="150" Height="28"
                          ItemsSource="{Binding Path=RingoSource}"
                          ValueMemberPath="Name"
                      
@@ -99,14 +99,28 @@
                          Text="{Binding Path=SelectedRingoName, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
                          
                          ItemTemplate="{StaticResource ResourceKey=AutoCompleteBoxItemTemplate}"
-                         ItemFilter="{Binding RingoFilter}"/>
-        <TextBox Grid.Row="1" Name="textbox" Width="200" Height="28" 
+                         ItemFilter="{Binding RingoFilter}"/>-->
+        <!--<TextBox Grid.Row="1" Name="textbox" Width="200" Height="28" 
                  KeyDown="TextBox_KeyDown" 
                  TextChanged="TextBox_TextChanged"
                  PreviewKeyDown="textbox_PreviewKeyDown">
             
-        </TextBox>
+        </TextBox>-->
 
+        <TextBlock Text="{Binding SelectedRingo.Name, Mode=OneWay}" />
+
+        <local:ItemSelectPopup Grid.Row="1" 
+                               ItemsSource="{Binding RingoSource}"
+                               SelectedItem="{Binding SelectedRingo}"
+                               ButtonContent="ボタンテキストテスト">
+            <local:ItemSelectPopup.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Name}" />
+                </DataTemplate>
+            </local:ItemSelectPopup.ItemTemplate>
+        </local:ItemSelectPopup>
+                               
+        
         <ScrollViewer Grid.Row="2" Name="scrollViewer1" VerticalScrollBarVisibility="Auto"  VerticalAlignment="Top">
             <Grid Name="expanderGrid" >
                 <Grid.RowDefinitions>

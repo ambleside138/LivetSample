@@ -50,7 +50,7 @@ namespace WpfBaseSample
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            Console.WriteLine("textChanged=" + textbox.Text );
+            /////Console.WriteLine("textChanged=" + textbox.Text );
 
             
         }
