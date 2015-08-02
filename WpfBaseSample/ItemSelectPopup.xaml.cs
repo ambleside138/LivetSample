@@ -27,7 +27,7 @@ namespace WpfBaseSample
         const int DefaultColumnCount = 3;
 
         /// <summary> デフォルト最大高さ </summary>
-        const int DefaultItemViewerMaxHeight = 300;
+        const int DefaultListBoxMaxHeight = 300;
         #endregion
 
 
@@ -83,19 +83,19 @@ namespace WpfBaseSample
             DependencyProperty.Register("ColumnCount", typeof(int), typeof(ItemSelectPopup), new PropertyMetadata(DefaultColumnCount));
         #endregion
 
-        #region MaxHeight依存関係プロパティ
+        #region ListBoxMaxHeight依存関係プロパティ
         /// <summary>
         /// リストボックスの最大高さを取得または設定します
         /// </summary>
-        public int ItemViewerMaxHeight
+        public int ListBoxMaxHeight
         {
-            get { return (int)GetValue(ItemViewerMaxHeightProperty); }
-            set { SetValue(ItemViewerMaxHeightProperty, value); }
+            get { return (int)GetValue(ListBoxMaxHeightProperty); }
+            set { SetValue(ListBoxMaxHeightProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for ItemViewerMaxHeight.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty ItemViewerMaxHeightProperty =
-            DependencyProperty.Register("ItemViewerMaxHeight", typeof(int), typeof(ItemSelectPopup), new PropertyMetadata(DefaultItemViewerMaxHeight));
+        public static readonly DependencyProperty ListBoxMaxHeightProperty =
+            DependencyProperty.Register("ListBoxMaxHeight", typeof(int), typeof(ItemSelectPopup), new PropertyMetadata(DefaultListBoxMaxHeight));
         #endregion
 
         #region SelectionMode依存関係プロパティ
@@ -166,7 +166,9 @@ namespace WpfBaseSample
         /// <param name="e"></param>
         private void btnShow_Click(object sender, RoutedEventArgs e)
         {
-            //btnOK.Visibility = SelectionMode == System.Windows.Controls.SelectionMode.Single ? Visibility.Collapsed : System.Windows.Visibility.Visible;
+            var isSingleSelectMode = SelectionMode == System.Windows.Controls.SelectionMode.Single;
+            btnSelectAll.Visibility = isSingleSelectMode ? Visibility.Collapsed : System.Windows.Visibility.Visible;
+            btnClear.Visibility = isSingleSelectMode ? Visibility.Collapsed : System.Windows.Visibility.Visible;
 
             popup.IsOpen = true;
             var ringo = (Ringo)SelectedItem;
@@ -228,6 +230,16 @@ namespace WpfBaseSample
             }
 
             return true;
+        }
+
+        private void btnSelectAll_Click(object sender, RoutedEventArgs e)
+        {
+            listBox.SelectAll();
+        }
+
+        private void btnClear_Click(object sender, RoutedEventArgs e)
+        {
+            listBox.UnselectAll();
         }
     }
 }
