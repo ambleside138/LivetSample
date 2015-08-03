@@ -112,11 +112,19 @@
         <local:ItemSelectPopup Grid.Row="1" 
                                ItemsSource="{Binding RingoSource}"
                                SelectedItem="{Binding SelectedRingo}"
-                               ButtonContent="ボタンテキストテスト"
-                               SelectionMode="Single">
+                               ButtonContent="{Binding SelectedRingo.Item.Name}"
+                               SelectionMode="Multiple"
+                               >
+            <!--<local:ItemSelectPopup.Resources>
+                <DataTemplate DataType="{x:Type local:Ringo}">
+                    <TextBlock Text="{Binding Name}" ToolTip="{Binding Text, RelativeSource={RelativeSource Self}}" TextTrimming="CharacterEllipsis"/>
+                </DataTemplate>
+            </local:ItemSelectPopup.Resources>-->
+
+            
             <local:ItemSelectPopup.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding Name}" ToolTip="{Binding Text, RelativeSource={RelativeSource Self}}" TextTrimming="CharacterEllipsis"/>
+                    <TextBlock Text="{Binding Item.Name}" ToolTip="{Binding Text, RelativeSource={RelativeSource Self}}" TextTrimming="CharacterEllipsis"/>
                 </DataTemplate>
             </local:ItemSelectPopup.ItemTemplate>
         </local:ItemSelectPopup>

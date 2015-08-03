@@ -169,16 +169,7 @@ namespace WpfBaseSample
             btnClear.Visibility = isSingleSelectMode ? Visibility.Collapsed : System.Windows.Visibility.Visible;
 
             popup.IsOpen = true;
-            var ringo = (Ringo)SelectedItem;
-            if( ringo == null )
-            {
-                Console.WriteLine("NULL");
-            }
-            else
-            {
-                Console.WriteLine("SELECTED: " + ringo.Name);
-            }
-            
+          
 
         }
 

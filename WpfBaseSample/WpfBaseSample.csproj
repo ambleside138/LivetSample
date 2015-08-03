@@ -78,6 +78,7 @@
     <Compile Include="InsertionCursor.xaml.cs">
       <DependentUpon>InsertionCursor.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ItemSelectHelper.cs" />
     <Compile Include="ItemSelectPopup.xaml.cs">
       <DependentUpon>ItemSelectPopup.xaml</DependentUpon>
     </Compile>

@@ -9,11 +9,38 @@ using System.Windows.Controls;
 
 namespace WpfBaseSample
 {
-    class Ringo
+    class Ringo : INotifyPropertyChanged
     {
         public int ID { get; set; }
         public string Name { get; set; }
 
+
+        //#region IsSelected変更通知プロパティ
+        //private bool _IsSelected;
+
+        //public bool IsSelected
+        //{
+        //    get
+        //    { return _IsSelected; }
+        //    set
+        //    { 
+        //        if (_IsSelected == value)
+        //            return;
+        //        _IsSelected = value;
+        //        RaisePropertyChanged("IsSelected");
+        //    }
+        //}
+        //#endregion
+
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        // INotifyPropertyChanged.PropertyChangedイベントを発生させる。
+        protected virtual void RaisePropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+        }
         //public override bool Equals(object obj)
         //{
         //    return ((Ringo)obj).Name == Name;
@@ -24,7 +51,7 @@ namespace WpfBaseSample
 
     class ViewModel : INotifyPropertyChanged
     {
-        private ObservableCollection<Ringo> _ringoSource;
+        private ObservableCollection<ItemSelectHelper<Ringo>> _ringoSource;
         //public ObservableCollection<Ringo> RingoSource
         //{
         //    get
@@ -44,21 +71,22 @@ namespace WpfBaseSample
         //        return _ringoSource;
         //    }
         //}
-        public ObservableCollection<Ringo> RingoSource
+        public ObservableCollection<ItemSelectHelper<Ringo>> RingoSource
         {
             get
             {
                 if (_ringoSource == null)
                 {
-                    _ringoSource = new ObservableCollection<Ringo>( Enumerable.Range(0, 5).Select(i => new Ringo() { ID = i, Name = "RINGO" + i + Environment.NewLine + "HOGE"}) );
+                    //_ringoSource = new ObservableCollection<Ringo>(Enumerable.Range(0, 5).Select(i => new Ringo { ID = i, Name = "RINGO" + i + Environment.NewLine + "HOGE", IsSelected = i % 2 == 0 }));
+                    _ringoSource = new ObservableCollection<ItemSelectHelper<Ringo>>(Enumerable.Range(0, 5).Select(i => new ItemSelectHelper<Ringo>( new Ringo { ID = i, Name = "RINGO" + i + Environment.NewLine + "HOGE" }){ IsSelected = i % 2 == 0 } ) );
                 }
                 return _ringoSource;
             }
         }
 
-        private Ringo _SelectedRingo;
+        private ItemSelectHelper<Ringo> _SelectedRingo;
 
-        public Ringo SelectedRingo
+        public ItemSelectHelper<Ringo> SelectedRingo
         {
             get { return _SelectedRingo; }
             set { 
@@ -135,10 +163,10 @@ namespace WpfBaseSample
 
         public ViewModel()
         {
-            var selected = new Ringo{ Name = "SELECTED_RINGO", ID=100};
-            RingoSource.Add(selected );
-            RingoSource.Add(new Ringo() { ID = 3, Name = "ジョナゴールドながいもじがあるとき" });
-            SelectedRingo = selected;
+            //var selected = new Ringo{ Name = "SELECTED_RINGO", ID=100};
+            ////RingoSource.Add(selected );
+            ////RingoSource.Add(new Ringo() { ID = 3, Name = "ジョナゴールドながいもじがあるとき" });
+            //SelectedRingo = selected;
         }
     }
 }
