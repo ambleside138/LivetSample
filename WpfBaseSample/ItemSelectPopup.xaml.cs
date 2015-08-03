@@ -30,8 +30,6 @@ namespace WpfBaseSample
         const int DefaultListBoxMaxHeight = 300;
         #endregion
 
-
-
         public ItemSelectPopup()
         {
             InitializeComponent();           
