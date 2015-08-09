@@ -46,6 +46,7 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
+
         <TreeView Grid.RowSpan="1" Grid.Column="1" ItemsSource="{Binding PersonSource}">
             <TreeView.ItemTemplate>
                 <HierarchicalDataTemplate DataType="local:Person" ItemsSource="{Binding Children}">
