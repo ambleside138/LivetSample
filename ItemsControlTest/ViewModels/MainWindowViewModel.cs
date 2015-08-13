@@ -30,7 +30,7 @@ namespace ItemsControlTest.ViewModels
                 if (_Person == value)
                     return;
                 _Person = value;
-                RaisePropertyChanged();
+                RaisePropertyChanged("Person");
             }
         }
         #endregion
@@ -48,7 +48,7 @@ namespace ItemsControlTest.ViewModels
                 if (_Persons == value)
                     return;
                 _Persons = value;
-                RaisePropertyChanged();
+                RaisePropertyChanged("Persons");
             }
         }
         #endregion
@@ -63,7 +63,7 @@ namespace ItemsControlTest.ViewModels
 
         public void Init()
         {
-            Persons = new ObservableSynchronizedCollection<Person>(Enumerable.Range(0, 100000).Select(i => new Person { Name = "TEST" + i, Age = i }));
+            Persons = new ObservableSynchronizedCollection<Person>(Enumerable.Range(0, 100).Select(i => new Person { Name = "TEST" + i, Age = i }));
             Persons.Add(new Person2 { ExName = "ExNameSample", Name = "Ex", Age = 2015 });
         }
     }

@@ -26,7 +26,7 @@ namespace ItemsControlTest.Models
                 if (_ExName == value)
                     return;
                 _ExName = value;
-                RaisePropertyChanged();
+                RaisePropertyChanged("ExName");
             }
         }
         #endregion

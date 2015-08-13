@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ItemsControlTest.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -30,6 +31,62 @@ namespace ItemsControlTest.Views
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void textbox_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.Key!=Key.Enter)
+            {
+                return;
+            }
+
+            var collection = listbox.ItemsSource as IList<Person>;
+            var selected = ((TextBox)sender).DataContext as Person;
+            var selectedIndex = collection.IndexOf(selected);
+            var newPerson = new Person { Name = "NewPerson", Age = 0 };
+            collection.Insert(selectedIndex + 1, newPerson);
+            
+            // 要素を作成
+            listbox.UpdateLayout();
+
+            //listbox.SelectedIndex = selectedIndex + 1;
+            FocusContainerChild(newPerson);
+        }
+
+        void FocusContainerChild( object dataContext )
+        {
+            var item = listbox.ItemContainerGenerator.ContainerFromItem(dataContext) as ListBoxItem;
+
+
+            listbox.ScrollIntoView(item);
+
+            
+
+            var textbox = FindVisualChild<TextBox>(item);
+            textbox.Focus();
+        }
+
+        void FocusTextBox()
+        {
+            
+        }
+
+        private childItem FindVisualChild<childItem>(DependencyObject obj)
+    where childItem : DependencyObject
+        {
+            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(obj); i++)
+            {
+                DependencyObject child = VisualTreeHelper.GetChild(obj, i);
+                if (child != null && child is childItem)
+                    return (childItem)child;
+                else
+                {
+                    childItem childOfChild = FindVisualChild<childItem>(child);
+                    if (childOfChild != null)
+                        return childOfChild;
+                }
+            }
+            return null;
         }
     }
 }

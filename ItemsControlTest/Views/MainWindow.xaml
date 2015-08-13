@@ -11,17 +11,24 @@
         Title="MainWindow" Height="350" Width="525">
     <Window.Resources>
         <DataTemplate x:Key="personView" DataType="m:Person">
-                       
-            <StackPanel>
-                <TextBlock>
+            <Border BorderBrush="LightGray" BorderThickness="1" Margin="4" Background="White" CornerRadius="2">
+                <Border.Effect>
+                    <DropShadowEffect ShadowDepth="0" BlurRadius="3" Color="LightGray" Opacity="0.8" />
+                </Border.Effect>
+                
+                <StackPanel Background="White" Margin="16">
+                    <TextBlock>
                     <Run Text="{Binding Name, FallbackValue=test}" />
                     <Run Text="さん" />
-                </TextBlock>
-                <TextBlock>
+                    </TextBlock>
+                    <TextBlock>
                     <Run Text="{Binding Age}" />
                     <Run Text="歳" />
-                </TextBlock>
-            </StackPanel>
+                    </TextBlock>
+                    <TextBox Name="textbox" PreviewKeyDown="textbox_PreviewKeyDown" Text="{Binding MyProperty2}"/>
+                </StackPanel>
+            </Border>
+ 
         </DataTemplate>
 
         <DataTemplate x:Key="personView2" DataType="m:Person2">
@@ -65,12 +72,30 @@
     
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition />
-            <RowDefinition />
+            <RowDefinition Height="4*" />
+            <RowDefinition Height="1*" />
         </Grid.RowDefinitions>
         
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
+        
         <ListBox ItemsSource="{Binding Persons}"
+                 Name="listbox"
                  IsSynchronizedWithCurrentItem="True">
+
+            <ListBox.Resources>
+                <Style TargetType="ListBoxItem">
+                    <!-- このトリガーを設けないと子要素編集時に強調表示しない -->
+                    <Style.Triggers>
+                        <Trigger Property="IsKeyboardFocusWithin" Value="true">
+                            <Setter Property="IsSelected" Value="true" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </ListBox.Resources>
+
             <ListBox.ItemTemplateSelector>
                 <v:PersonDataTemplateSelector />
             </ListBox.ItemTemplateSelector>
