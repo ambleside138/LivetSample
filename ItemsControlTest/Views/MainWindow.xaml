@@ -6,7 +6,38 @@
         xmlns:l="http://schemas.livet-mvvm.net/2011/wpf"
         xmlns:v="clr-namespace:ItemsControlTest.Views"
         xmlns:vm="clr-namespace:ItemsControlTest.ViewModels"
+        xmlns:m="clr-namespace:ItemsControlTest.Models"
+        xmlns:diag="clr-namespace:System.Diagnostics;assembly=WindowsBase"
         Title="MainWindow" Height="350" Width="525">
+    <Window.Resources>
+        <DataTemplate x:Key="personView" DataType="m:Person">
+                       
+            <StackPanel>
+                <TextBlock>
+                    <Run Text="{Binding Name, FallbackValue=test}" />
+                    <Run Text="さん" />
+                </TextBlock>
+                <TextBlock>
+                    <Run Text="{Binding Age}" />
+                    <Run Text="歳" />
+                </TextBlock>
+            </StackPanel>
+        </DataTemplate>
+
+        <DataTemplate x:Key="personView2" DataType="m:Person2">
+            <StackPanel Background="LightBlue">
+                <TextBlock Text="=====EX=====" />
+                <TextBlock>
+                    <Run Text="{Binding Name, FallbackValue=test}" />
+                    <Run Text="さん" />
+                </TextBlock>
+                <TextBlock>
+                    <Run Text="{Binding Age}" />
+                    <Run Text="歳" />
+                </TextBlock>
+            </StackPanel>
+        </DataTemplate>
+    </Window.Resources>
     
     <Window.DataContext>
         <vm:MainWindowViewModel/>
@@ -33,6 +64,28 @@
     </i:Interaction.Triggers>
     
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
         
+        <ListBox ItemsSource="{Binding Persons}"
+                 IsSynchronizedWithCurrentItem="True">
+            <ListBox.ItemTemplateSelector>
+                <v:PersonDataTemplateSelector />
+            </ListBox.ItemTemplateSelector>
+        </ListBox>
+        
+        <StackPanel Grid.Row="1">
+            <Button Content="設定">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Click">
+                        <l:LivetCallMethodAction MethodName="Init" MethodTarget="{Binding}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </Button>
+            <ContentControl Content="{Binding Persons/}" ContentTemplate="{StaticResource personView}" />
+        </StackPanel>
+
     </Grid>
 </Window>
