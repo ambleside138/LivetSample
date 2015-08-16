@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 
 using Livet;
+using System.Collections.ObjectModel;
 
 namespace ItemsControlTest.Models
 {
@@ -26,6 +27,25 @@ namespace ItemsControlTest.Models
             }
             
         }
+
+
+        #region Children変更通知プロパティ
+        private ObservableCollection<Person> _Children;
+
+        public ObservableCollection<Person> Children
+        {
+            get
+            { return _Children; }
+            set
+            { 
+                if (_Children == value)
+                    return;
+                _Children = value;
+                RaisePropertyChanged("Children");
+            }
+        }
+        #endregion
+
 
         public int MyProperty { get; set; }
 

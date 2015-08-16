@@ -64,7 +64,12 @@ namespace ItemsControlTest.ViewModels
         public void Init()
         {
             Persons = new ObservableSynchronizedCollection<Person>(Enumerable.Range(0, 100).Select(i => new Person { Name = "TEST" + i, Age = i }));
-            Persons.Add(new Person2 { ExName = "ExNameSample", Name = "Ex", Age = 2015 });
+            //Persons.Add(new Person2 { ExName = "ExNameSample", Name = "Ex", Age = 2015 });
+
+            foreach(var person in Persons)
+            {
+                person.Children = new System.Collections.ObjectModel.ObservableCollection<Person>(Enumerable.Range(0, 10).Select(i => new Person { Name = "Child00" + i, Age = i }));
+            }
         }
     }
 }

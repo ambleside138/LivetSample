@@ -15,7 +15,6 @@
                 <Border.Effect>
                     <DropShadowEffect ShadowDepth="0" BlurRadius="3" Color="LightGray" Opacity="0.8" />
                 </Border.Effect>
-                
                 <StackPanel Background="White" Margin="16">
                     <TextBlock>
                     <Run Text="{Binding Name, FallbackValue=test}" />
@@ -28,7 +27,6 @@
                     <TextBox Name="textbox" PreviewKeyDown="textbox_PreviewKeyDown" Text="{Binding MyProperty2}"/>
                 </StackPanel>
             </Border>
- 
         </DataTemplate>
 
         <DataTemplate x:Key="personView2" DataType="m:Person2">
@@ -44,6 +42,18 @@
                 </TextBlock>
             </StackPanel>
         </DataTemplate>
+        <Style x:Key="NestedListBoxStyle" TargetType="ListBox">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <ItemsPresenter />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Window.Resources>
     
     <Window.DataContext>
@@ -111,6 +121,32 @@
             </Button>
             <ContentControl Content="{Binding Persons/}" ContentTemplate="{StaticResource personView}" />
         </StackPanel>
+        <ListBox Grid.Column="1" ItemsSource="{Binding Persons}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <TextBlock>Header</TextBlock>
+                        <TextBlock Text="{Binding Name}" />
+                        <ListBox ItemsSource="{Binding Children}" Style="{StaticResource NestedListBoxStyle}">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Name}" />
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                            
+                        </ListBox>
+                        <!--<ItemsControl ItemsSource="{Binding Children}" Background="White">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Name}" />
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>-->
+                        <TextBlock>Footer</TextBlock>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
 
     </Grid>
 </Window>
