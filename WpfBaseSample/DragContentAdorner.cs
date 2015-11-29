@@ -9,6 +9,9 @@ using System.Windows.Media;
 
 namespace WpfBaseSample
 {
+    /// <summary>
+    /// ドラッグ対象コンテンツを透過して表示するためのクラス
+    /// </summary>
     class DragContentAdorner : ControlHostAdornerBase
     {
         private readonly ContentPresenter _contentPresenter;

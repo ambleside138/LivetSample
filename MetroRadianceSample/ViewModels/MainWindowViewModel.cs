@@ -12,6 +12,7 @@ using Livet.EventListeners;
 using Livet.Messaging.Windows;
 
 using MetroRadianceSample.Models;
+using System.Diagnostics.Contracts;
 
 namespace MetroRadianceSample.ViewModels
 {
@@ -21,6 +22,7 @@ namespace MetroRadianceSample.ViewModels
 
         public void Initialize()
         {
+            
         }
 
 
@@ -53,6 +55,11 @@ namespace MetroRadianceSample.ViewModels
                         new Player("6","梵"),
                     });
             }
+        }
+
+        public void OpenWindow()
+        {
+            Messenger.Raise(new TransitionMessage("ShowCommand"));
         }
     }
 

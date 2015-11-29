@@ -82,8 +82,8 @@
     
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="4*" />
-            <RowDefinition Height="1*" />
+            <RowDefinition Height="Auto" MaxHeight="200" />
+            <RowDefinition Height="1*" Name="anime" />
         </Grid.RowDefinitions>
         
         <Grid.ColumnDefinitions>
@@ -121,7 +121,7 @@
             </Button>
             <ContentControl Content="{Binding Persons/}" ContentTemplate="{StaticResource personView}" />
         </StackPanel>
-        <ListBox Grid.Column="1" ItemsSource="{Binding Persons}">
+        <ListBox Grid.Column="1" ItemsSource="{Binding Persons}" Name="listAnime" Height="32">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
@@ -147,6 +147,34 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
+
+        <Grid Grid.Row="1" Grid.Column="1" Background="Transparent">
+            <Grid.Triggers>
+                <EventTrigger RoutedEvent="MouseEnter">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetName="listAnime" 
+                                        Storyboard.TargetProperty="Height"
+                                        To="160" Duration="0:0:0.5" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+                <!--<EventTrigger RoutedEvent="MouseLeave">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetName="listAnime" 
+                                        Storyboard.TargetProperty="Height"
+                                        To="0" Duration="0:0:0.5" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>-->
+            </Grid.Triggers>
+
+            <TextBlock HorizontalAlignment="Center" FontSize="20" Text="Filters..."/>
+
+            <Grid Name="ControlsGrid" Height="0" VerticalAlignment="Top" Background="Yellow">
+            </Grid>
+        </Grid>
 
     </Grid>
 </Window>

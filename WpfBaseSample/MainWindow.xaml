@@ -86,7 +86,7 @@
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
                         <TextBlock Text="{Binding Name}"/>
-                        <TextBox Name="tbRingo" Width="200" PreviewKeyDown="TextBox_PreviewKeyDown_1"/>
+
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
@@ -113,8 +113,8 @@
         <local:ItemSelectPopup Grid.Row="1" 
                                ItemsSource="{Binding RingoSource}"
                                SelectedItem="{Binding SelectedRingo}"
-                               ButtonContent="{Binding SelectedRingo.Item.Name}"
-                               SelectionMode="Multiple"
+                               ButtonContent="{Binding SelectedRingo, TargetNullValue=未選択}"
+                               SelectionMode="Single"
                                >
             <!--<local:ItemSelectPopup.Resources>
                 <DataTemplate DataType="{x:Type local:Ringo}">
@@ -125,7 +125,7 @@
             
             <local:ItemSelectPopup.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding Item.Name}" ToolTip="{Binding Text, RelativeSource={RelativeSource Self}}" TextTrimming="CharacterEllipsis"/>
+                    <TextBlock Text="{Binding Name}" ToolTip="{Binding Text, RelativeSource={RelativeSource Self}}" TextTrimming="CharacterEllipsis"/>
                 </DataTemplate>
             </local:ItemSelectPopup.ItemTemplate>
         </local:ItemSelectPopup>

@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WpfBaseSample"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300"
              Width="{Binding Width, ElementName=btnShow}"
@@ -22,6 +23,14 @@
             <Setter Property="ToolTip" Value="{Binding Text, RelativeSource={RelativeSource Self}}" />
             <Setter Property="Padding" Value="4" />
         </Style>
+        
+        <DataTemplate DataType="system:string">
+            <TextBlock Text="{Binding}" />
+        </DataTemplate>
+        
+        <Style TargetType="ListBox" x:Key="ItemSelectPopupListBoxKey">
+            
+        </Style>
     </UserControl.Resources>
     
     <Grid Width="{Binding Width, ElementName=btnShow}">
@@ -36,7 +45,19 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
                 <!--ボタンの内容-->
-                <ContentPresenter Grid.Column="0" Margin="4" Content="{Binding ButtonContent, RelativeSource={RelativeSource AncestorType={x:Type local:ItemSelectPopup}}}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <ContentPresenter Grid.Column="0"
+                                  Margin="4" 
+                                  Content="{Binding ButtonContent, RelativeSource={RelativeSource AncestorType={x:Type local:ItemSelectPopup}}}" 
+                                  HorizontalAlignment="Stretch"
+                                  VerticalAlignment="Stretch">
+                    <!--<ContentPresenter.Style>
+                        <Style TargetType="ContentPresenter">
+                            <Style.Triggers>
+                                <Trigger 
+                            </Style.Triggers>
+                        </Style>
+                    </ContentPresenter.Style>-->
+                </ContentPresenter>
                 <!--三角形の表示-->
                 <Polygon  Grid.Column="1" Fill="DimGray" Points="4,6 0,0 8,0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="8,4,4,4"/>
             </Grid>
@@ -87,7 +108,7 @@
                             <ListBox.ItemContainerStyle>
                                 <Style TargetType="ListBoxItem">
                                     <Setter Property="OverridesDefaultStyle" Value="True" />
-                                    <Setter Property="IsSelected" Value="{Binding IsSelected}" />
+                                    <Setter Property="IsSelected" Value="{Binding IsSelected, FallbackValue=true}" />
                                     <Setter Property="Template">
                                         <Setter.Value>
                                             <ControlTemplate TargetType="{x:Type ContentControl}">

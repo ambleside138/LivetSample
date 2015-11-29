@@ -7,6 +7,7 @@
         xmlns:v="clr-namespace:MetroRadianceSample.Views"
         xmlns:vm="clr-namespace:MetroRadianceSample.ViewModels"
         xmlns:metro="http://schemes.grabacr.net/winfx/2014/controls"
+                   xmlns:c="clr-namespace:MetroRadianceSample.Controls"
         Background="{DynamicResource ThemeBrushKey}"
 		Foreground="{DynamicResource ActiveForegroundBrushKey}"
         Topmost="{Binding TopMost}"
@@ -122,6 +123,13 @@
 
         <!--WindowのCloseキャンセル処理に対応する場合は、WindowCloseCancelBehaviorの使用を検討してください-->
 
+
+        <l:InteractionMessageTrigger MessageKey="ShowCommand" Messenger="{Binding Messenger}">
+            <!-- Window を表示するメッセージアクション 
+                 Window を非表示にしてもメッセージを送信できるようにするには InvokeActionOnlyWhenWindowIsActive="False" が必要 -->
+            <l:TransitionInteractionMessageAction WindowType="{x:Type v:ChildWindow}" Mode="Modal"
+                                                  InvokeActionOnlyWhenWindowIsActive="False" />
+        </l:InteractionMessageTrigger>
     </i:Interaction.Triggers>
     
     <Grid ShowGridLines="True">
@@ -138,6 +146,8 @@
             <RowDefinition />
             <RowDefinition />
             <RowDefinition Height="96" />
+            <RowDefinition />
+            <RowDefinition />
         </Grid.RowDefinitions>
 
         <Border Grid.Row="0" Grid.ColumnSpan="2"
@@ -208,5 +218,23 @@
             <TextBox>通常のテキストボックス</TextBox>
         </StackPanel>
         
+        <!--子ウインドウ表示-->
+        <TextBlock Grid.Row="7">ウインドウ</TextBlock>
+        <Button Grid.Row="7" Grid.Column="1">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="Click">
+                    <l:LivetCallMethodAction MethodName="OpenWindow"
+                                             MethodTarget="{Binding}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            ウインドウ表示
+        </Button>
+        
+        <!--ItemSelect-->
+        <TextBlock Grid.Row="8">ItemSelectPopup</TextBlock>
+        <c:ItemSelectPopup Grid.Row="8"
+                           Grid.Column="1">
+            
+        </c:ItemSelectPopup>
     </Grid>
 </metro:MetroWindow>

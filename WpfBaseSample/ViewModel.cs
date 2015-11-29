@@ -51,46 +51,60 @@ namespace WpfBaseSample
 
     class ViewModel : INotifyPropertyChanged
     {
-        private ObservableCollection<ItemSelectHelper<Ringo>> _ringoSource;
-        //public ObservableCollection<Ringo> RingoSource
-        //{
-        //    get
-        //    {
-        //        if (_ringoSource == null)
-        //        {
-        //            _ringoSource = new ObservableCollection<Ringo>()
-        //    {
-        //        new Ringo(){ ID = 1, Name = "シナノゴールド" },
-        //        new Ringo(){ ID = 2, Name = "シナノドルチェ" },
-        //        new Ringo(){ ID = 3, Name = "ジョナゴールド" },
-        //        new Ringo(){ ID = 1, Name = "しなのごーるど" },
-        //        new Ringo(){ ID = 2, Name = "しなのどるちぇ" },
-        //        new Ringo(){ ID = 3, Name = "ジョナゴールドながいもじがあるとき" }
-        //    };
-        //        }
-        //        return _ringoSource;
-        //    }
-        //}
-        public ObservableCollection<ItemSelectHelper<Ringo>> RingoSource
+        private ObservableCollection<Ringo> _ringoSource;
+        public ObservableCollection<Ringo> RingoSource
         {
             get
             {
                 if (_ringoSource == null)
                 {
-                    //_ringoSource = new ObservableCollection<Ringo>(Enumerable.Range(0, 5).Select(i => new Ringo { ID = i, Name = "RINGO" + i + Environment.NewLine + "HOGE", IsSelected = i % 2 == 0 }));
-                    _ringoSource = new ObservableCollection<ItemSelectHelper<Ringo>>(Enumerable.Range(0, 5).Select(i => new ItemSelectHelper<Ringo>( new Ringo { ID = i, Name = "RINGO" + i + Environment.NewLine + "HOGE" }){ IsSelected = i % 2 == 0 } ) );
+                    _ringoSource = new ObservableCollection<Ringo>()
+            {
+                new Ringo(){ ID = 1, Name = "シナノゴールド" },
+                new Ringo(){ ID = 2, Name = "シナノドルチェ" },
+                new Ringo(){ ID = 3, Name = "ジョナゴールド" },
+                new Ringo(){ ID = 1, Name = "しなのごーるど" },
+                new Ringo(){ ID = 2, Name = "しなのどるちぇ" },
+                new Ringo(){ ID = 3, Name = "ジョナゴールドながいもじがあるとき" }
+            };
                 }
                 return _ringoSource;
             }
         }
+        //public ObservableCollection<ItemSelectHelper<Ringo>> RingoSource
+        //{
+        //    get
+        //    {
+        //        if (_ringoSource == null)
+        //        {
+        //            _ringoSource = new ObservableCollection<Ringo>(Enumerable.Range(0, 5).Select(i => new Ringo { ID = i, Name = "RINGO" + i + Environment.NewLine + "HOGE", IsSelected = i % 2 == 0 }));
+        //            //_ringoSource = new ObservableCollection<ItemSelectHelper<Ringo>>(Enumerable.Range(0, 5).Select(i => new ItemSelectHelper<Ringo>( new Ringo { ID = i, Name = "RINGO" + i + Environment.NewLine + "HOGE" }){ IsSelected = i % 2 == 0 } ) );
+        //        }
+        //        return _ringoSource;
+        //    }
+        //}
 
-        private ItemSelectHelper<Ringo> _SelectedRingo;
+        //private ItemSelectHelper<Ringo> _SelectedRingo;
 
-        public ItemSelectHelper<Ringo> SelectedRingo
+        //public ItemSelectHelper<Ringo> SelectedRingo
+        //{
+        //    get { return _SelectedRingo; }
+        //    set { 
+        //        if( _SelectedRingo == value) return;
+        //        _SelectedRingo = value;
+        //        RaisePropertyChanged("SelectedRingo");
+        //    }
+        //}
+
+
+        private Ringo _SelectedRingo;
+
+        public Ringo SelectedRingo
         {
             get { return _SelectedRingo; }
-            set { 
-                if( _SelectedRingo == value) return;
+            set
+            {
+                if (_SelectedRingo == value) return;
                 _SelectedRingo = value;
                 RaisePropertyChanged("SelectedRingo");
             }
@@ -163,6 +177,7 @@ namespace WpfBaseSample
 
         public ViewModel()
         {
+            SelectedRingo = null;
             //var selected = new Ringo{ Name = "SELECTED_RINGO", ID=100};
             ////RingoSource.Add(selected );
             ////RingoSource.Add(new Ringo() { ID = 3, Name = "ジョナゴールドながいもじがあるとき" });
